@@ -10,6 +10,18 @@ include(ClangFormat)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
+# Warning flags
+if(MSVC)
+    add_compile_options(/W4 /WX)
+else()
+    add_compile_options(-Wall -Wextra)
+endif()
+
+# Optimization flags
+if(NOT MSVC)
+    add_compile_options(-O2)
+endif()
+
 add_executable(hello src/main.cpp)
 target_link_libraries(hello PRIVATE
     fmt
