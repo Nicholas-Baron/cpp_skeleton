@@ -32,5 +32,6 @@ target_link_libraries(hello PRIVATE
 )
 target_include_directories(hello PUBLIC 
     external/fmtlib/include
+    external/boost_ut
 )
 target_clangformat_setup(hello)
