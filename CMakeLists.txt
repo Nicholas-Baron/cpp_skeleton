@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 
+# Modern C++
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED YES)
+
 project(fmt_test)
 
 # For fmtlib
@@ -8,10 +12,6 @@ add_subdirectory(external/fmtlib)
 # For clang-format support
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 include(ClangFormat)
-
-# Modern C++
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
 # Warning flags
 if(MSVC)
