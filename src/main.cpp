@@ -1,7 +1,8 @@
 #include <fmt/core.h>
-#include <ut.hpp>
+#include <fmt/ranges.h>
+
+#include <vector>
 
 int main() {
-    using namespace boost::ut;
-    "print"_test = [] { fmt::print("Hello, World\n"); };
+    fmt::print("{}\n", std::vector<int>{1, 2, 3, 4, 5});
 }

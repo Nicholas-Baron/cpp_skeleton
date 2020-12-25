@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
+# Change the name of the project to start
 project(fmt_test)
 
 # For fmtlib
@@ -12,6 +13,8 @@ add_subdirectory(external/fmtlib)
 # For clang-format support
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 include(ClangFormat)
+
+clangformat_setup(fmt_test)
 
 # Warning flags
 if(MSVC)
@@ -25,13 +28,19 @@ if(NOT MSVC)
     add_compile_options(-O2)
 endif()
 
-# Setup executable
-add_executable(hello src/main.cpp)
-target_link_libraries(hello PRIVATE
-    fmt
-)
-target_include_directories(hello PUBLIC 
+# includes
+include_directories(
     external/fmtlib/include
     external/boost_ut
 )
-target_clangformat_setup(hello)
+
+# libraries
+link_libraries(
+    fmt
+)
+
+# Setup executable
+add_executable(hello src/main.cpp)
+
+# Setup test executable
+add_executable(hello_test src/test.cpp)
