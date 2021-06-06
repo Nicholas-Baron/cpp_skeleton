@@ -16,18 +16,6 @@ include(ClangFormat)
 
 clangformat_setup(fmt_test)
 
-# Warning flags
-if(MSVC)
-    add_compile_options(/W4 /WX)
-else()
-    add_compile_options(-Wall -Wextra -Werror -Wmissing-declarations)
-endif()
-
-# Optimization flags
-if(NOT MSVC)
-    add_compile_options(-O2)
-endif()
-
 # includes
 include_directories(
     external/fmtlib/include
@@ -38,6 +26,22 @@ include_directories(
 link_libraries(
     fmt
 )
+
+# Warning flags
+if(MSVC)
+    add_compile_options(/W4 /WX)
+else()
+    add_compile_options(
+        -Wall -Wextra -Werror -Wredundant-decls
+        -Wmissing-declarations -Wpedantic -Wimplicit-fallthrough -Walloc-zero
+        -Wsuggest-override -Wsuggest-final-types -Wsuggest-final-methods
+        )
+endif()
+
+# Optimization flags
+if(NOT MSVC)
+    add_compile_options(-O2)
+endif()
 
 # Setup executable
 add_executable(hello src/main.cpp)
